@@ -21,7 +21,7 @@ function create() {
 /*sample1
 	// displays preloaded image on-screen
     game.add.sprite(0, 0, 'einstein');*/
-/*sample2
+/*sample2*/
 	// add image
 	var image = game.add.image(game.world.centerX, game.world.centerY, 'einstein');
 	
@@ -35,8 +35,9 @@ function create() {
 	text = game.add.text(250, 16, '', { fill : "#ff0044" });
 	
 	// display on event
-	image.events.onInputDown.add(listener, this);*/
-var image = game.add.sprite(0, 0, 'einstein');
+	image.events.onInputDown.add(listener, this);
+/*sample3*/
+	var image = game.add.sprite(0, 0, 'einstein');
 game.physics.enable(image, Phaser.Physics.ARCADE);
 image.body.velocity.x = 150;
 }
