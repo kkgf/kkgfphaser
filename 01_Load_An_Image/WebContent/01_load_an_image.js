@@ -1,18 +1,15 @@
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 var text;
 var counter = 0;
+var sprite;
 
 function preload() {
 
     //  You can fill the preloader with as many assets as your game requires
-
-    //  Here we are loading an image. The first parameter is the unique
-    //  string by which we'll identify the image later in our code.
-
-    //  The second parameter is the URL of the image (relative)
     game.load.image('einstein', 'assets/pics/ra_einstein.png');
+	game.load.image('phaser', 'assets/pics/phaser.png');
 
 }
 
@@ -36,13 +33,33 @@ function create() {
 	
 	// display on event
 	image.events.onInputDown.add(listener, this);*/
-/*sample3 note that sprites and images have different attributes and methods*/
+/*sample3 note that sprites and images have different attributes and methods
 	var image = game.add.sprite(0, 0, 'einstein');
 	game.physics.enable(image, Phaser.Physics.ARCADE);
-	image.body.velocity.x = 150;
+	image.body.velocity.x = 150;*/
+/*sample4*/
+	game.physics.startSystem(Phaser.Physics.ARCADE);
+	sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
+	sprite.anchor.set(0.5);
+	
+	//give a physics body to the sprite
+	game.physics.arcade.enable(sprite);
+	
 }
 
-function listener (){
+function listener () {
 	counter++;
 	text.text = "You clicked " + counter + " times!";
+}
+
+function update () {
+	if(game.physics.arcade.distanceToPointer(sprite, game.input.activePointer) > 8){
+		game.physics.arcade.moveToPointer(sprite, 300);
+	}else{
+		sprite.body.velocity.set(0);
+	}
+}
+
+function render () {
+	game.debug.inputInfo(32,32);
 }
