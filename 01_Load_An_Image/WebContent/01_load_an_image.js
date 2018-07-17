@@ -18,8 +18,10 @@ function preload() {
 
 function create() {
 
+/*sample1
 	// displays preloaded image on-screen
-//    game.add.sprite(0, 0, 'einstein');
+    game.add.sprite(0, 0, 'einstein');*/
+/*sample2
 	// add image
 	var image = game.add.image(game.world.centerX, game.world.centerY, 'einstein');
 	
@@ -30,17 +32,16 @@ function create() {
 	image.inputEnabled = true;
 	
 	// set text params
-	text = game.add.text(250, 16, '', {
-		font : "65px Arial",
-		fill : "#ff0044"
-	});
+	text = game.add.text(250, 16, '', { fill : "#ff0044" });
 	
 	// display on event
-	image.events.onInputDown.add(listener, this);
-
+	image.events.onInputDown.add(listener, this);*/
+var image = game.add.sprite(0, 0, 'einstein');
+game.physics.enable(image, Phaser.Physics.ARCADE);
+image.body.velocity.x = 150;
 }
 
 function listener (){
 	counter++;
-	text.text = "You clicked " + counter + " times!"
+	text.text = "You clicked " + counter + " times!";
 }
