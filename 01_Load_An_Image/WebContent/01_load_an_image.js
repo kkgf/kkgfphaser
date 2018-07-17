@@ -15,8 +15,29 @@ function preload() {
 
 function create() {
 
-    //  This creates a simple sprite that is using our loaded image and
-    //  displays it on-screen
-    game.add.sprite(0, 0, 'einstein');
+	// displays preloaded image on-screen
+//    game.add.sprite(0, 0, 'einstein');
+	// add image
+	var image = game.add.image(game.world.centerX, game.world.centerX, 'einstein');
+	
+	// move image anchor to middle, so it centers properly
+	image.anchor.set(.5);
+	
+    // enable all kinds of input
+	image.inputEnabled = true;
+	
+	// set text params
+	text = game.add.text(250, 16, '', {
+		font : "65px Arial",
+		fill : "#ff0044"
+	});
+	
+	// display on event
+	image.events.onInputDown.add(listener, this);
 
+}
+
+function listener (){
+	counter++;
+	text.text = "You clicked " + counter + " times!"
 }
