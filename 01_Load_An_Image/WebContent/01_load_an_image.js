@@ -1,6 +1,9 @@
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
 
+var text;
+var counter = 0;
+
 function preload() {
 
     //  You can fill the preloader with as many assets as your game requires
@@ -18,10 +21,10 @@ function create() {
 	// displays preloaded image on-screen
 //    game.add.sprite(0, 0, 'einstein');
 	// add image
-	var image = game.add.image(game.world.centerX, game.world.centerX, 'einstein');
+	var image = game.add.image(game.world.centerX, game.world.centerY, 'einstein');
 	
 	// move image anchor to middle, so it centers properly
-	image.anchor.set(.5);
+	image.anchor.set(0.5);
 	
     // enable all kinds of input
 	image.inputEnabled = true;
