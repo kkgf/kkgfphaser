@@ -1,5 +1,9 @@
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+/*sample1-3
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });*/
+/*sample4
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });*/
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
 
 var text;
 var counter = 0;
@@ -10,6 +14,7 @@ function preload() {
     //  You can fill the preloader with as many assets as your game requires
     game.load.image('einstein', 'assets/pics/ra_einstein.png');
 	game.load.image('phaser', 'assets/pics/phaser.png');
+	game.load.atlasJSONHash('bot', 'assets/sprites/running_bot.png', 'assets/sprites/running_bot.json');
 
 }
 
@@ -37,14 +42,17 @@ function create() {
 	var image = game.add.sprite(0, 0, 'einstein');
 	game.physics.enable(image, Phaser.Physics.ARCADE);
 	image.body.velocity.x = 150;*/
-/*sample4*/
+/*sample4
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	sprite = game.add.sprite(game.world.centerX, game.world.centerY, 'phaser');
 	sprite.anchor.set(0.5);
 	
 	//give a physics body to the sprite
-	game.physics.arcade.enable(sprite);
-	
+	game.physics.arcade.enable(sprite);*/
+/*sample5*/
+	var bot = game.add.sprite(200, 200, 'bot');
+	bot.animations.add('run');
+	bot.animations.play('run', 15, true);
 }
 
 function listener () {
