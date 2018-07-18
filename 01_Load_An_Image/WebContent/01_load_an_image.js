@@ -23,7 +23,7 @@ function create() {
 /*sample1
 	// displays preloaded image on-screen
     game.add.sprite(0, 0, 'einstein');*/
-/*sample2
+/*sample2,6*/
 	// add image
 	var image = game.add.image(game.world.centerX, game.world.centerY, 'einstein');
 	
@@ -34,10 +34,11 @@ function create() {
 	image.inputEnabled = true;
 	
 	// set text params
-	text = game.add.text(250, 16, '', { fill : "#ff0044" });
+	style = {font : "65px Arial", fill : "#ff0044", align : "center"};
+	text = game.add.text(game.world.centerX-300, 0, '', style);
 	
 	// display on event
-	image.events.onInputDown.add(listener, this);*/
+	image.events.onInputDown.add(listener, this);
 /*sample3 note that sprites and images have different attributes and methods
 	var image = game.add.sprite(0, 0, 'einstein');
 	game.physics.enable(image, Phaser.Physics.ARCADE);
@@ -49,15 +50,15 @@ function create() {
 	
 	//give a physics body to the sprite
 	game.physics.arcade.enable(sprite);*/
-/*sample5*/
+/*sample5
 	var bot = game.add.sprite(200, 200, 'bot');
 	bot.animations.add('run');
-	bot.animations.play('run', 15, true);
+	bot.animations.play('run', 15, true);*/
 }
 
 function listener () {
 	counter++;
-	text.text = "You clicked " + counter + " times!";
+	text.text = "You clicked " + counter + " times! \n Now try to do better!";
 }
 
 function update () {
