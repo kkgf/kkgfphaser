@@ -1,21 +1,21 @@
 
-/*sample1-3
+/*sample1-3, 5-6
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });*/
-/*sample4
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });*/
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+/*sample4, 7*/
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 var text;
 var counter = 0;
 var sprite;
 
 function preload() {
+	/*sample7*/
+	game.forceSingleUpdate = true;
 
     //  You can fill the preloader with as many assets as your game requires
     game.load.image('einstein', 'assets/pics/ra_einstein.png');
 	game.load.image('phaser', 'assets/pics/phaser.png');
 	game.load.atlasJSONHash('bot', 'assets/sprites/running_bot.png', 'assets/sprites/running_bot.json');
-
 }
 
 function create() {
@@ -23,7 +23,7 @@ function create() {
 /*sample1
 	// displays preloaded image on-screen
     game.add.sprite(0, 0, 'einstein');*/
-/*sample2,6*/
+/*sample2,6
 	// add image
 	var image = game.add.image(game.world.centerX, game.world.centerY, 'einstein');
 	
@@ -38,7 +38,7 @@ function create() {
 	text = game.add.text(game.world.centerX-300, 0, '', style);
 	
 	// display on event
-	image.events.onInputDown.add(listener, this);
+	image.events.onInputDown.add(listener, this);*/
 /*sample3 note that sprites and images have different attributes and methods
 	var image = game.add.sprite(0, 0, 'einstein');
 	game.physics.enable(image, Phaser.Physics.ARCADE);
@@ -54,6 +54,9 @@ function create() {
 	var bot = game.add.sprite(200, 200, 'bot');
 	bot.animations.add('run');
 	bot.animations.play('run', 15, true);*/
+/*sample7*/
+	sprite = game.add.sprite(-400, 0, 'einstein');
+	game.add.tween(sprite).to( { x: 800 }, 5000, "Linear", true);
 }
 
 function listener () {
@@ -62,13 +65,15 @@ function listener () {
 }
 
 function update () {
+	/*sample4
 	if(game.physics.arcade.distanceToPointer(sprite, game.input.activePointer) > 8){
 		game.physics.arcade.moveToPointer(sprite, 300);
 	}else{
 		sprite.body.velocity.set(0);
-	}
+	}*/
 }
 
 function render () {
-	game.debug.inputInfo(32,32);
+	/*sample4
+	game.debug.inputInfo(32,32);*/
 }
