@@ -1,22 +1,26 @@
 
 /*sample1-3, 5-6
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });*/
-/*sample4, 7*/
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
-
-var text;
-var counter = 0;
-var sprite;
+/*sample4, 7
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });*/
+/*sample8*/
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
-	/*sample7*/
-	game.forceSingleUpdate = true;
+	/*sample7
+	game.forceSingleUpdate = true;*/
 
     //  You can fill the preloader with as many assets as your game requires
     game.load.image('einstein', 'assets/pics/ra_einstein.png');
 	game.load.image('phaser', 'assets/pics/phaser.png');
 	game.load.atlasJSONHash('bot', 'assets/sprites/running_bot.png', 'assets/sprites/running_bot.json');
+	game.load.image('arrow', 'assets/sprites/longarrow-white.png');
 }
+
+var text;
+var counter = 0;
+var sprite;
+var arrow;
 
 function create() {
 
@@ -54,9 +58,37 @@ function create() {
 	var bot = game.add.sprite(200, 200, 'bot');
 	bot.animations.add('run');
 	bot.animations.play('run', 15, true);*/
-/*sample7*/
+/*sample7
 	sprite = game.add.sprite(-400, 0, 'einstein');
-	game.add.tween(sprite).to( { x: 800 }, 5000, "Linear", true);
+	game.add.tween(sprite).to( { x: 800 }, 5000, "Linear", true);*/
+/*sample7*/
+	game.stage.backgroundColor = '#000000';
+	var labelStyle = {font : "16px courier", fill : "#00ff00", align : "center"};
+	var circle = new Phaser.Circle(400, 300, 450);
+	var labelCircle = new Phaser.Circle(400, 300, 530);
+	var graphics = game.add.graphics(0,0);
+	graphics.lineStyle(2,0x00ff00,1);
+	graphics.drawCircle(circle.x, circle.y, circle.diameter);
+	
+	for (var a = 0; a < 360; a += 22.5){
+		graphics.moveTo(400, 300);
+		var p= circle.circumferencePoint(a, true);
+		graphics.lineTo(p.x, p.y);
+		var lp = labelCircle.circumferencePoint(a, true);
+		var na = a;
+		if(a>180){
+			na -= 360;
+		}
+		var rads = String(Phaser.Math.degToRad(na)).substr(0,5);
+		var info = na + "" + rads;
+		var label = game.add.text(lp.x, lp.y, info, labelStyle);
+		label.centerX = lp.x;
+		label.centerY = lp.y;
+	}
+	
+	arrow = game.add.sprite(game.world.centerX, game.world.centerY, 'arrow');
+	arrow.anchor.set(0,0.5);
+	arrow.tint = 0xff0000;
 }
 
 function listener () {
@@ -71,9 +103,13 @@ function update () {
 	}else{
 		sprite.body.velocity.set(0);
 	}*/
+	arrow.angle += 0.2;
 }
 
 function render () {
 	/*sample4
 	game.debug.inputInfo(32,32);*/
+    game.debug.text('Sprite Rotation', 24, 32);
+    game.debug.text('Angle: ' + arrow.angle.toFixed(2), 24, 64);
+    game.debug.text('Rotation: ' + arrow.rotation.toFixed(2), 24, 96);
 }
