@@ -145,11 +145,11 @@ function fireBullet () {
 
         if (lazer.scale.x === 1)
         {
-            // lazer.anchor.x = 1;
+            lazer.anchor.x = 1;
         }
         else
         {
-            // lazer.anchor.x = 0;
+            lazer.anchor.x = 0;
         }
 
         //  Lazers start out with a width of 96 and expand over time
