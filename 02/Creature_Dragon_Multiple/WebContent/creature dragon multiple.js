@@ -16,7 +16,7 @@ function create() {
 
     game.add.image(0, 0, 'sky');
 
-    dragon1 = game.add.creature(149, 200, 'dragonTexture', 'dragonMesh');
+    dragon1 = game.add.creature(150, 200, 'dragonTexture', 'dragonMesh');
     dragon1.scale.set(25.0);
     dragon1.play(true); //  true = loop
 
